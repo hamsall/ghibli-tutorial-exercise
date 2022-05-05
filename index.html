@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <title>Ghibli Encyclopedia</title>
+</head>
+
+<body>
+
+  <div id="root" class="grid-container">
+    <!-- Header -->
+    <header class="header">
+      <img src="logo.png" alt="Ghibli logo" />
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <!-- Internal nav container for sticky positioning -->
+      <div class="nav-container">
+        <h2>Ghibli Encyclopedia</h2>
+        <ul>
+          <!-- Nav items for current and potential future pages -->
+          <li class="active"><a href="index.html">Films</a></li>
+          <li><a href="characters.html">Characters</a></li>
+          <li><a href="locations.html">Locations</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="content">
+      <!-- This should remain empty - our content will be dynamically loaded with JS -->
+    </main>
+
+    <!-- Aside -->
+    <aside class="aside">
+      <!-- Internal aside container for sticky positioning -->
+      <div class="aside-container">
+        <h2>Favourites</h2>
+        <ul>
+          <!-- This should remain empty - our content will be dynamically loaded from local storage -->
+        </ul>
+        <button id="clear">Clear Favourites</button>
+      </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made using the <a href="https://ghibliapi.herokuapp.com/">Studio Ghibli API</a>.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
