@@ -10,7 +10,7 @@ request.open('GET', 'https://ghibliapi.herokuapp.com/films');
 
 
 // When the URL loads
-request.onload = function() {
+request.onload = function () {
 
   // Parse the response from the API as JSON data and store in a variable
   let data = JSON.parse(this.response);
@@ -47,11 +47,63 @@ request.onload = function() {
       card.appendChild(heading);
       card.appendChild(paragraph);
 
-      //Create button element
-      let favButton = document.createElement("button");
-      favButton.textContent = "Add to Favourites";
 
-      card.appendChild(favButton);
+      /* -----------------------
+      EXERCISE 3 - LOCAL STORAGE
+      ----------------------- */
+
+      // Create favourites button HTML Element
+      let button = document.createElement('button');
+      button.textContent = "Add to Favourites";
+
+      //Append favourites button to card container
+      card.appendChild(button);
+
+      // Add an event listener to the button
+      button.addEventListener("click", function(event) {
+
+        // Create a key to store the movie title
+        // This must be a string, and needs to be unique for each movie, otherwise will overwirte existing localStorage
+        // HINT: Find out how many items are in local storage, then add 1
+        let key = (localStorage.length + 1).toString();
+
+        // Store the value of the movie title as a variable
+        // HINT: Get the title from the <h1> element in the parent card container
+        var value = this.parentNode.getElementsByTagName('h1')[0].textContent;
+
+        // console.log(key, value); // Uncomment to see the key value pair
+
+
+        console.log(localStorage);
+
+        // var toSearch = value;
+        // if(localStorage.key(i).indexOf(toSearch)!=-1) {
+        //
+        // //   console.log(value);
+        // // //   // Add the key/value pair to localStorage
+        //   localStorage.setItem(key, value);
+        // }
+
+        // Create variable to store whether the value exists
+        let exists = false;
+        // loop through items in storage
+        for(var i=0; i<localStorage.length; i++) {
+            // compare each value for every key in local storage with input value from user
+            if(localStorage.getItem(localStorage.key(i)) == value) {
+              // set exists to true only if value found
+              exists = true;
+            }
+        }
+        // check exists boolean and add item if value doesn't exist
+        if (exists == false){
+          localStorage.setItem(key, value);
+        }
+        // Call the updateFavourites() function to refresh the list of movies
+        updateFavourites();
+      });
+
+
+
 
     });
 
@@ -65,3 +117,57 @@ request.onload = function() {
 
 // Send request for processing - important that this is after the onload function
 request.send();
+
+/* -----------------------
+EXERCISE 3 - LOCAL STORAGE
+LEAVE THE FOLLOWING CODE
+----------------------- */
+
+updateFavourites();
+
+let clearButton = document.getElementById("clear");
+clearButton.addEventListener("click", function(){
+  localStorage.clear();
+  updateFavourites();
+})
+
+function updateFavourites(){
+  let list = document.querySelector("aside ul");
+  list.innerHTML = "";
+  if (localStorage.length > 0) {
+    for (let i = 0; i < localStorage.length; i++){
+      let key = localStorage.key(i);
+      let value = localStorage.getItem(key);
+      // console.log(key, value);
+      let listItem = document.createElement("li");
+      listItem.textContent = value;
+      list.appendChild(listItem);
+    }
+  }
+}
+
+/* -----------------------
+EXERCISE 1 - LOCAL STORAGE
+LEAVE THE FOLLOWING CODE
+----------------------- */
+
+updateFavourites();
+clearButton.addEventListener("click", function(){
+  localStorage.clear();
+  updateFavourites();
+})
+
+function updateFavourites(){
+  let list = document.querySelector("aside ul");
+  list.innerHTML = "";
+  if (localStorage.length > 0) {
+    for (let i = 0; i < localStorage.length; i++){
+      let key = localStorage.key(i);
+      let value = localStorage.getItem(key);
+      // console.log(key, value);
+      let listItem = document.createElement("li");
+      listItem.textContent = value;
+      list.appendChild(listItem);
+    }
+  }
+}
