@@ -53,6 +53,15 @@ request.onload = function() {
 
       card.appendChild(favButton);
 
+      favButton.addEventListener("click", function(event) {
+        // make da key for local storage
+        let key = (localStorage.length + 1).toString();
+        // make da value for local storage
+        var value = this.parentNode.getElementsByTagName('h1')[0].textContent;
+        // testing localstorage with the console log
+        console.log(value);
+      });
+
     });
 
   } else {
@@ -65,3 +74,4 @@ request.onload = function() {
 
 // Send request for processing - important that this is after the onload function
 request.send();
+
